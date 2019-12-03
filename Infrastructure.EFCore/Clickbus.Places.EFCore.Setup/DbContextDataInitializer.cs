@@ -13,7 +13,7 @@ namespace Clickbus.Places.EFCore.Setup
         {
             try
             {
-                context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted(); 
 
                 context.Database.EnsureCreated();
 
@@ -28,7 +28,7 @@ namespace Clickbus.Places.EFCore.Setup
                         EntityDataFactory<Place>.Factory_Entity_Instance(
                             x =>
                             {
-                                x.Name = DateTime.Now.ToString();
+                                x.State = "SP";
                             }));
 
                 int save = context.SaveChanges();
@@ -36,6 +36,7 @@ namespace Clickbus.Places.EFCore.Setup
             catch (Exception ex)
             {
                 string message = ex.Message;
+                //throw new Exception(ex.Message);
             }
         }
     }

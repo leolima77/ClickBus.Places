@@ -14,7 +14,7 @@ namespace Clickbus.Places.Domains.Entities
         public string Name { get; set; }
 
         [Key]
-        [StringLength(50)]
+        [StringLength(120)]
         public string Slug { get; set; }
 
         [StringLength(120)]

@@ -15,6 +15,7 @@ namespace Clickbus.Places.WebApi
     using DataServices.Interfaces;
     using DomainServices;
     using EFCore.Setup;
+    using Microsoft.Extensions.Logging;
 
     public class Startup
     {
@@ -22,7 +23,7 @@ namespace Clickbus.Places.WebApi
         {
             Configuration = configuration;
 
-            DbContextDataInitializer.Initialize(new InMemoryDbContext());
+            DbContextDataInitializer.Initialize(new SqlServerDbContext(Configuration));
         }
 
         public IConfiguration Configuration { get; }
@@ -31,8 +32,12 @@ namespace Clickbus.Places.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             //generic services
+            //services.AddDbContext<DbContext>(options => new SqlServerDbContext(Configuration) );
 
-            services.AddScoped<DbContext, InMemoryDbContext>();
+            services.AddScoped<DbContext, SqlServerDbContext>(x =>
+            {
+                return new SqlServerDbContext(Configuration);
+            });
 
             services.AddTransient(typeof(IEntityDataService<>), typeof(EntityDataService<>));
 
@@ -40,7 +45,11 @@ namespace Clickbus.Places.WebApi
 
             //custom services
 
-            services.AddScoped<AppDbContext, InMemoryDbContext>();
+            services.AddScoped<AppDbContext, SqlServerDbContext>(x => 
+            {
+                return new SqlServerDbContext(Configuration);
+            });
+            //services.AddDbContext<AppDbContext>(options => new SqlServerDbContext(Configuration));
 
             services.AddTransient<IPlaceDataService, PlaceDataService>();
             services.AddTransient<PlaceDomainService>();
@@ -69,11 +78,16 @@ namespace Clickbus.Places.WebApi
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
+                //app.UseBrowserLink();
             }
             else
             {

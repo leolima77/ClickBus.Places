@@ -7,7 +7,7 @@ namespace Clickbus.Places.DataServices.Interfaces
 {
     public interface IPlaceDataService: IEntityDataService<Place>
     {
-        Task<IList<Place>> GetByName(string firstName); 
-
+        Task<IList<Place>> GetByName(string firstName);
+        Task<IList<Place>> ListAll();
     }
 }

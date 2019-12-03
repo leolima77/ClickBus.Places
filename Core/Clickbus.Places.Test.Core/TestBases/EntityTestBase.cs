@@ -14,7 +14,7 @@ namespace Clickbus.Places.Test.Core.TestBases
             DbIdExpression = idExpression;
         }
 
-        protected virtual TEntity Factory_Entity(Action<TEntity> action = null, bool setIdWithDefault = true)
+        protected virtual TEntity Factory_Entity(Action<TEntity> action = null, bool setIdWithDefault = true) 
         {
             var entity = Factory_Entity<TEntity>();
 

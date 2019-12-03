@@ -21,10 +21,10 @@ namespace Clickbus.Places.Core.WebApi
             return await DomainService.GetAll();
         }
 
-        [HttpGet("{id}")]
-        public virtual async Task<TDomain> Get(TId id)
+        [HttpGet("{slug}")]
+        public virtual async Task<TDomain> Get(TId slug)
         {
-            return await DomainService.GetById(id);
+            return await DomainService.GetById(slug);
         }
 
         [HttpPost]
@@ -33,16 +33,16 @@ namespace Clickbus.Places.Core.WebApi
             await DomainService.Add(domain);
         }
 
-        [HttpPut("{id}")]
-        public virtual async Task Put(TId id, TDomain domain)
+        [HttpPut("{slug}")]
+        public virtual async Task Put(TId slug, TDomain domain)
         {
-            await DomainService.Update(id, domain);
+            await DomainService.Update(slug, domain);
         }
 
-        [HttpDelete("{id}")]
-        public virtual async Task Delete(TId id)
+        [HttpDelete("{slug}")]
+        public virtual async Task Delete(TId slug)
         {
-            await DomainService.Delete(id);
+            await DomainService.Delete(slug);
         }
     }
 }

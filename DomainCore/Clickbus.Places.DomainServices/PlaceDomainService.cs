@@ -20,5 +20,10 @@ namespace Clickbus.Places.DomainServices
             return await _placeDataService.GetByName(firstName);
         }
 
+        public virtual async Task<IList<Place>> ListAll()
+        {
+            return await _placeDataService.ListAll();
+        }
+
     }
 }
