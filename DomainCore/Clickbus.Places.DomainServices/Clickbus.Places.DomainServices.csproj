@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Clickbus.Places.Core\Clickbus.Places.Core.csproj" />
+    <ProjectReference Include="..\..\DomainCore\Clickbus.Places.DataServices.Interfaces\Clickbus.Places.DataServices.Interfaces.csproj" />
+    <ProjectReference Include="..\..\DomainCore\Clickbus.Places.Domains\Clickbus.Places.Domains.csproj" />
+  </ItemGroup>
+
+</Project>
